@@ -1,0 +1,5 @@
+17-Jul-2021 18:17:01 ---> A connection was successfully established with the server, but then an error occurred during the pre-login handshake. (provider: SSL Provider, error: 0 - The wait operation timed out.)
+17-Jul-2021 18:17:01 ---> Value cannot be null. (Parameter 'source')
+17-Jul-2021 18:17:43 ---> Invalid column name 'IDMenu'.
+17-Jul-2021 18:25:37 ---> Invalid column name 'IDMenu'.
+17-Jul-2021 18:28:15 ---> Invalid column name 'IDMenu'.

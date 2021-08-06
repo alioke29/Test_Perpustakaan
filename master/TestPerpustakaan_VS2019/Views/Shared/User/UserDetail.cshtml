@@ -1,0 +1,205 @@
+﻿@using TestPerpustakaan_VS2019.Library.Entities;
+
+@{
+    ViewData["Title"] = "User Detail Page";
+}
+
+<div id="modal-form-userdetail" class="modal" aria-hidden="true"
+     data-keyboard="false" data-backdrop="static"
+     style="top:0%; left:0%; width:100%; overflow:hidden;  ">
+
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:120%;">
+            <div class="modal-header btn-primary">
+
+                @*<button type="button" class="close fa-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                <h4 class="modal-title font-bold"><div id="title"></div></h4>
+            </div>
+
+            <div class="modal-body" style="height:100%; ">
+
+                <form class="form-horizontal">
+
+                    <input type="hidden" id="hdnId" value="" />
+
+                    <div class="form-group">
+                        <label class="col-lg-3">User Name</label>
+                        <div class="col-lg-5">
+                            <input id="txtUserName" type="text" placeholder="User Name" class="form-control" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3">Password</label>
+                        <div class="col-lg-5">
+                            <input id="txtPass" type="password" placeholder="Password" maxlength="16" class="form-control" value="">
+                            <span class="text-danger">(alpha numeric max. 16 character)</span>
+                        </div>
+                        <span style="position:relative; margin-left:0px; ">
+                            <input id="chkIsShowPass" type="checkbox" />&nbsp;&nbsp;
+                            <button class="btn btn-primary btn-sm btnGeneratePass"
+                                    data-toggle="tooltip" data-placement="bottom" title="Generate Password">
+                                <i class="fa fa-gear"></i>&nbsp;&nbsp;Auto Generate
+                            </button>
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3">Confirm Password</label>
+                        <div class="col-lg-5">
+                            <input id="txtConfirmPass" type="password" placeholder="Confirm Password" maxlength="8" class="form-control" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3">Fullname</label>
+                        <div class="col-lg-5">
+                            <input id="txtFullname" type="text" placeholder="Fullname" class="form-control" value="">
+                        </div>
+                    </div>
+
+
+                    @*<div class="form-group">
+                        <label class="col-lg-3">Email</label>
+                        <div class="col-lg-5">
+                            <input id="txtEmail" type="text" placeholder="Email" class="form-control" value="">
+                        </div>
+                    </div>*@
+
+                    <div class="form-group" style="padding-left:15px;">
+
+                        <table style="width:85%;">
+                            <tr>
+                                <td style="width:350px;">
+                                    <b>Email</b>
+                                </td>
+                                <td style="padding-left:20px; width:350px;">
+                                    <b>Location</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:350px;">
+                                    <input id="txtEmail" type="text" placeholder="Email" class="form-control" value="">
+                                </td>
+                                <td style="padding-left:20px; width:350px;">
+                                    <input id="hiddenLocationId" type="hidden" value="" />
+                                    <select class="form-control" id="ddlLocation">
+                                        <option value="">-- select location --</option>
+                                        @foreach (var itemLocation in (ViewData["vdLocationList"] as List<LocationEntity.Location>))
+                                        {
+                                            <option value="@itemLocation.ID">@itemLocation.LocationName</option>
+                                        }
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr height="10">
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="width:350px;">
+                                    <b>Role</b>
+                                </td>
+                                <td style="padding-left:20px; width:350px;">
+                                    <b>Is Active</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:350px;">                             
+                                        <input id="hiddenRoleId" type="hidden" value="" />
+                                        <select class="form-control" id="ddlRole">
+                                            <option value="">-- Select role --</option>
+                                            @foreach (var itemRole in (ViewData["vdRoleList"] as List<RoleEntity.Role>))
+                                            {
+                                                <option value="@itemRole.ID">@itemRole.RoleName</option>
+                                            }
+                                        </select>
+                           
+                                </td>
+                                <td style="padding-left:20px; width:350px;">
+                                    <input id="hiddenIsActive" type="hidden" value="" />
+                                    <select class="form-control" id="ddlIsActive">
+                                        <option value="False">Inactive</option>
+                                        <option value="True">Active</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+
+                    <div class="form-group hide">
+                        <label class="col-lg-3">Is Login</label>
+                        <div class="col-lg-3">
+                            <input id="hiddenIsLogin" type="hidden" value="" />
+                            <input id="chkIsLogin" type="checkbox" />
+
+                        </div>
+                    </div>
+
+                </form>
+
+                <br />
+
+                <div class="modal-footer" style="width:100%; left:0%;">
+                    <button class="btn btn-primary" type="button" style="width:20%; left:0;"
+                            onclick="getClose();">
+                        <b>Cancel</b>
+                    </button>
+                    <button class="btn btn-primary" type="button" style="width:20%; left:0;"
+                            onclick="getSave();">
+                        <b>Save</b>
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $('#chkIsShowPass').on('click', function (e) {
+
+                    if ($('#chkIsShowPass').is(':checked')) {
+                        $("#txtPass").attr('type', 'text');
+                    } else {
+                        $("#txtPass").attr('type', 'password');
+                    }
+
+                });
+
+            });
+
+
+            // Generate Password
+            $('.btnGeneratePass').on('click', function (e) {
+
+                $.ajax({
+                    url: getBaseURL() + '/User/GeneratePassword/',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (json) {
+
+                        $("#txtPass").val(json.value);
+                    },
+                    error: function (json) {
+                        alert(json);
+                    }
+                });
+
+                return e.preventDefault();
+            });
+
+</script>
+

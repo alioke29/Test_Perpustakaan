@@ -1,0 +1,83 @@
+﻿@using TestPerpustakaan_VS2019.Library.Entities;
+
+@{
+    ViewData["Title"] = "Buku Detail Page";
+}
+
+<div id="modal-form-bukudetail" class="modal" aria-hidden="true"
+     data-keyboard="false" data-backdrop="static"
+     style="top:10%; left:0%; width:100%; overflow:hidden;  ">
+
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:120%;">
+            <div class="modal-header btn-primary">
+
+                @*<button type="button" class="close fa-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                <h4 class="modal-title font-bold"><div id="title"></div></h4>
+            </div>
+
+            <div class="modal-body" style="height:100%; ">
+
+                <form class="form-horizontal">
+
+                    <input type="hidden" id="hdnId" value="" />
+
+                    <div class="form-group">
+                        <label class="col-lg-3">Judul Buku</label>
+                        <div class="col-lg-5">
+                            <input id="txtJudulBuku" type="text" placeholder="Judul Buku" class="form-control" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3">Pengarang</label>
+                        <div class="col-lg-5">
+                            <input id="txtPengarang" type="text" placeholder="Pengarang" class="form-control" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3">Jenis Buku</label>
+                        <div class="col-lg-5">
+                            <input id="hiddenJenisBuku" type="hidden" value="" />
+                            <select class="form-control" id="ddlJenisBuku">
+                                <option value="Fiksi">Fiksi</option>
+                                <option value="Non Fiksi">Non Fiksi</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3">Harga Sewa Hari (Rp)</label>
+                        <div class="col-lg-5">
+                            <input id="txtHargaSewa" type="text" placeholder="Harga Sewa Hari (Rp)" class="form-control text-right" value="">
+                        </div>
+                    </div>
+
+                </form>
+
+                <br />
+
+                <div class="modal-footer" style="width:100%; left:0%;">
+                    <button class="btn btn-primary" type="button" style="width:20%; left:0;"
+                            onclick="getClose();">
+                        <b>Cancel</b>
+                    </button>
+                    <button class="btn btn-primary" type="button" style="width:20%; left:0;"
+                            onclick="getSave();">
+                        <b>Save</b>
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+

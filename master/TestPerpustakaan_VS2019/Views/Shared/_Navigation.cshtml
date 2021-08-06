@@ -1,0 +1,59 @@
+﻿
+@model List<TestPerpustakaan_VS2019.Library.Entities.MenuEntity.Menu>
+
+@{
+
+    ViewBag.Title = "Dashboard";
+
+
+}
+
+
+<div style="position:relative; left:0px; top:-30px; z-index:9999; float:left;">
+    <a href="@Url.Action("Index", "Home")">
+        @*<img alt="image" src="~/content/images/APLLOGOWhite.png" height="230" width="230" />*@
+        TEST
+    </a>
+</div>
+
+
+<nav class="navbar-default navbar-static-side" role="navigation" style="padding-top:100px;">
+    <div class="sidebar-collapse" >
+        <ul class="nav" id="side-menu">
+
+
+            <li class="nav-header">
+
+                <div class="dropdown profile-element">
+
+
+                    @*<span class="block m-t-xs">
+                    <strong class="font-bold">@ViewData["vdFullnameProfile"]</strong>
+                </span> <span class="text-muted text-xs block">@ViewData["vdPositionProfile"] <b class="caret"></b></span>*@
+
+
+                </div>
+                <div class="logo-element">
+
+                </div>
+            </li>
+
+
+
+            <li class="@Html.IsSelected(action: "Index", controller: "Home", cssClass: "active")">
+                <a onclick="loadingProcess()" href="@Url.Action("Index", "Home")">
+                    <i class="fa fa-home"></i>
+                    <span class="nav-label" data-i18n="nav.dashboard">
+                        Home
+                    </span>
+                </a>
+            </li>
+
+            <!-- Get Treeview Control -->
+            @Html.Partial("UserControls/TreeviewMenu")
+
+        </ul>
+    </div>
+</nav>
+
+

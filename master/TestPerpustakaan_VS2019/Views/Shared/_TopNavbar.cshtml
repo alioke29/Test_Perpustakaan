@@ -1,0 +1,138 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="stylesheet" href="~/lib_bower/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib_bower/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="~/css/animate.css" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib_bower/sweetalert/dist/sweetalert.css" />
+
+    <link rel="stylesheet" href="~/Content/css/login.css" />
+
+    <style>
+        .text-grad {
+            font-size: 25px;
+            font-family: Arial;
+            font-weight: bold;
+            background: -webkit-linear-gradient(blue, navy);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+
+
+    <script src="~/lib_bower/jquery/dist/jquery.js"></script>
+
+    <script src="~/lib_bower/sweetalert/dist/sweetalert-dev.js"></script>
+    <script src="~/lib_bower/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="~/content/js_custom/login.js"></script>
+
+</head>
+
+<!-- Ajax Loading Control -->
+@Html.Partial("UserControls/AjaxLoadingControl")
+
+
+
+<body>
+
+    <div class="row border-bottom" style="top:0px; bottom:0px; ">
+
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+            <div class="navbar-header" >
+
+                 <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href="#">
+                    <i class="fa fa-bars"></i>
+                 </a>
+
+                <br />
+                <div style="position:absolute; margin-top:-20px; margin-left:100px;">
+
+                    @*<a class="btn btn-primary toggleMenu" href="#" ><i class="fa fa-bars"></i></a>*@
+
+                    <h2 class="text-grad">TEST PERPUSTAKAAN</h2>
+                </div>
+            </div>
+
+            <div style="position:relative; left:-50px; top:10px; float:right; ">
+
+                @if (ViewData["vdHeaderName"] != null)
+                {
+                    <a href="#" onclick="getLogout()">
+                        [ <i class="fa fa-sign-out"></i> Log out ]
+                    </a>
+                }
+                else
+                {
+                    <a class="linkLogin" href="#">
+                        [ <i class="fa fa-sign-in"></i> Log in ]
+                    </a>
+                }
+
+            </div>
+
+            <div style="position:relative; left:30px; top:85px; float:right;">
+                @*<img alt="image" src="~/content/images/LogoZP.png" height="60" width="120" />*@
+                
+            </div>
+
+
+            <div style="position:absolute; margin-left:20px; margin-top:130px; color:purple; font-weight:bold;">
+                <i class="fa fa-calendar"></i>
+                <script type="text/javascript">
+                    var sekarang = new Date(); var namaHari = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"); var namaBulan = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"); var x = 0; if (sekarang.getYear() < 2000) { x = 1900 } var yangTahun = sekarang.getYear() + x;
+                    document.write(namaHari[sekarang.getDay()] + ", " + sekarang.getDate() + " " + namaBulan[sekarang.getMonth()] + " " + yangTahun)
+                </script>
+            </div>
+
+
+            <div style="position:relative; left:570px; margin-top:130px;">
+
+                @if (ViewData["vdHeaderName"] != null)
+                {
+
+                    string userName = "";
+                    userName = @ViewData["vdHeaderName"].ToString();
+
+                    string userNameAs = "";
+                    userNameAs = @ViewData["vdHeaderNameAs"].ToString();
+
+                    <i class="fa fa-user"></i>
+                    <b style="color:blue">Welcome,</b> <b style="color:green">@userName</b> <b style="color:blue">as</b> <b style="color:green">@userNameAs</b>
+                }
+
+            </div>
+
+
+
+        </nav>
+    </div>
+
+
+</body>
+</html>
+
+
+<script>
+
+
+
+
+</script>
+
+
+

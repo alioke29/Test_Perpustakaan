@@ -1,0 +1,109 @@
+﻿@model List<TestPerpustakaan_VS2019.Library.Entities.MenuEntity.Menu>
+@using TestPerpustakaan_VS2019.Library.Utilities;
+
+<!-- Ajax Loading Control -->
+@Html.Partial("UserControls/AjaxLoadingControl")
+
+
+
+@if (Model != null && Model.Count() > 0)
+{
+    @foreach (var item in Model.Where(x => x.ID != 1)
+                               .Where(x => string.IsNullOrEmpty(x.ParentMenuCode)))
+    {
+
+
+
+        if (ViewData["vdTreeviewMenuCode"] != null)
+        {
+            if (item.Code == ViewData["vdTreeviewMenuCode"].ToString())
+            {
+                ViewData["vdActive"] = "active";
+            }
+            else
+            {
+                ViewData["vdActive"] = "";
+            }
+        }
+        else
+        {
+            ViewData["vdActive"] = "";
+        }
+
+
+        <li class="@ViewData["vdActive"]">
+            <a href="#">
+
+                @if (item.DisplayName.ToString().ToLower() == EnumCollection.ParentMenuName.SecurityManagement.ToLower())
+                {
+                    <i class="fa fa-gears"></i>
+                }
+                else if (item.DisplayName.ToString().ToLower() == EnumCollection.ParentMenuName.Master.ToLower())
+                {
+                    <i class="fa fa-pencil"></i>
+                }
+                else if (item.DisplayName.ToString().ToLower() == EnumCollection.ParentMenuName.Transaction.ToLower())
+                {
+                    <i class="fa fa-user"></i>
+                }
+                else if (item.DisplayName.ToString().ToLower() == EnumCollection.ParentMenuName.Report.ToLower())
+                {
+                    <i class="fa fa-book"></i>
+                }
+
+                <span class="nav-label" data-i18n="nav.dashboard">
+                    @item.DisplayName
+                </span>
+
+                <span class="fa arrow"></span>
+            </a>
+
+
+            <ul class="nav nav-second-level collapse">
+
+                @foreach (var item2 in Model.Where(x => !string.IsNullOrEmpty(x.ParentMenuCode) && x.ParentMenuCode == item.Code))
+                {
+
+                    @if (ViewData["vdTreeviewMenuCode"] != null)
+                    {
+                        if (item2.Code == ViewData["vdTreeviewSubMenuCode"].ToString())
+                        {
+                            ViewData["vdActive2"] = "active";
+                        }
+                        else
+                        {
+                            ViewData["vdActive2"] = "";
+                        }
+                    }
+                    else
+                    {
+                        ViewData["vdActive2"] = "";
+                    }
+
+                    <li class="@ViewData["vdActive2"]">
+                        <a onclick="loadingProcess()" href="@Url.Action(item2.UrlNav, "Home", new { code = item.Code + "_" + item2.Code })">
+                            @item2.DisplayName
+                        </a>
+                    </li>
+
+                }
+
+            </ul>
+
+
+        </li>
+
+    }
+}
+
+
+
+
+
+<script type="text/javascript">
+
+    function loadingProcess() {
+        $("#mask").show();
+    }
+
+</script>
